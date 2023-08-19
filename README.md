@@ -54,3 +54,28 @@ Płatne plany premium oferujące zaawansowane funkcje, takie jak dostęp do zaaw
 
 Zdobycie X użytkowników w ciągu pierwszego roku.
 Osiągnięcie konwersji X% użytkowników darmowego planu na plan premium w ciągu pierwszych trzech miesięcy.
+
+## Narzędzia
+### Frameworki:
+
+#### Spring Boot: Do budowy back-endu i REST API.
+#### React.js: Do tworzenia responsywnego interfejsu użytkownika.
+### Baza Danych:
+#### PostgreSQL lub MySQL: Relacyjne bazy danych do przechowywania danych użytkowników.
+### Front-end Libraries:
+
+#### Material-UI: Do tworzenia estetycznego interfejsu użytkownika.
+#### Axios: Do wykonywania zapytań HTTP z front-endu.
+### Hosting:
+#### Tradycyjny dostawca hostingu: Do hostowania zarówno aplikacji back-endowej (Java) jak i front-endowej (React.js).
+### Testowanie i Debugowanie:
+#### Postman: Do testowania REST API.
+#### JUnit: Do tworzenia testów jednostkowych w Javie.
+### Dokumentacja:
+#### Swagger: Do automatycznego generowania dokumentacji API.
+### Projektowanie Graficzne:
+
+#### Adobe XD lub Figma: Do projektowania interfejsu użytkownika.
+### Bezpieczeństwo i Autoryzacja:
+
+#### Spring Security: Do zabezpieczania aplikacji i autoryzacji użytkowników.
