@@ -1,8 +1,13 @@
+import org.openapitools.generator.gradle.plugin.tasks.GenerateTask
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.1.3'
     id 'io.spring.dependency-management' version '1.1.3'
+    id "org.openapi.generator" version "4.2.3"
 }
+
+apply plugin: "org.openapi.generator"
 
 group = 'pl.kathelan'
 version = '0.0.1-SNAPSHOT'
@@ -26,10 +31,66 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'com.h2database:h2'
+    testImplementation 'com.h2database:h2'
     annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+    implementation 'javax.annotation:javax.annotation-api:1.3.2'
+    implementation 'io.springfox:springfox-swagger2:3.0.0'
+    implementation 'org.openapitools:jackson-databind-nullable:0.2.6'
+    implementation 'org.hibernate:hibernate-validator:8.0.1.Final'
+    implementation 'org.mapstruct:mapstruct:1.4.1.Final'
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.1.Final'
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine:5.7.2'
+    testImplementation('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'junit', module: 'junit'
+    }
+    testImplementation 'org.mockito:mockito-junit-jupiter:3.11.2'
+    implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.0.3'
 }
 
-tasks.named('test') {
+def generatorVar = "spring"
+def outputVar = "${buildDir}/generated".toString()
+def modelVar = 'pl.kathelan.backend.api.generated.module'
+def apiVar = 'pl.kathelan.backend.api.generated.api'
+def configVar = [
+        sourceFolder         : 'sources',
+        interfaceOnly        : 'true',
+        dateLibrary          : 'java8-localdatetime',
+        skipDefaultInterface : 'true',
+        implicitHeaders      : 'true',
+        useTags              : 'true',
+        performBeanValidation: 'true',
+        useBeanValidation    : 'true'
+]
+def systemVar = [
+        apis                   : "",
+        models                 : "",
+        hideGenerationTimestamp: 'true'
+]
+
+task generateDeepLApi(type: GenerateTask) {
+    generatorName = generatorVar
+    inputSpec = "${projectDir}/src/main/resources/open-api/deepL.yaml".toString()
+    outputDir = outputVar
+    modelPackage = modelVar
+    apiPackage = apiVar
+    configOptions = configVar
+    systemProperties = systemVar
+}
+
+sourceSets {
+    main {
+        java {
+            srcDir "${buildDir}/generated/sources"
+        }
+    }
+}
+
+
+compileJava.dependsOn generateDeepLApi
+test {
     useJUnitPlatform()
 }

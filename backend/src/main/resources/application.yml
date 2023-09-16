@@ -14,3 +14,7 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.H2Dialect
+
+api:
+  translateUrl: https://api-free.deepl.com/v2/translate
+  apiKey: "ZjcwYWJhYTktNmE4NS1kMzg3LWQxYTEtNDQxYTQyY2FmYTM0OmZ4"
