@@ -1,47 +1,44 @@
-Przygotuj środowisko:
+2. Inicjalizacja Projektu Spring Boot:
 
-Zainstaluj JDK 17.
-Zainstaluj Gradle.
-Zainstaluj narzędzie Spring Initializr lub użyj jego wersji online.
-Utwórz nowy projekt Spring Boot za pomocą Spring Initializr:
+2.1. Użyj Spring Initializr do utworzenia nowego projektu.
+2.1.1. Wybierz Gradle jako system budowy.
+2.1.2. Dodaj zależności dla Spring Web i innych potrzebnych bibliotek.
+2.2. Zaimportuj i skonfiguruj projekt w swoim IDE.
+3. Integracja z DJL:
 
-Wybierz Gradle jako system budowy.
-Dodaj zależności dla Web (Spring Web) i wszelkie inne potrzebne zależności, które planujesz używać.
-Skonfiguruj projekt w IDE (np. IntelliJ IDEA lub Eclipse).
+3.1. Dodaj zależności DJL do pliku build.gradle.
+3.2. Umieść pobrane pliki modelu w katalogu resources/models (lub innym odpowiednim miejscu).
+3.3. W kodzie aplikacji:
+3.3.1. Załaduj model przy starcie aplikacji.
+3.3.2. Skonfiguruj tokenizację tekstu używając dostarczonych plików.
+4. Tworzenie Endpointu API:
 
-Dodaj zależności DJL do pliku build.gradle:
+4.1. Utwórz kontroler Spring MVC.
+4.2. Dodaj endpoint (np. POST) do podsumowywania tekstu.
+4.2.1. Przyjmuj dane wejściowe jako tekst.
+4.2.2. Przetwarzaj tekst za pomocą tokenizera i modelu.
+4.2.3. Zwracaj podsumowanie jako odpowiedź.
+5. Logowanie i Monitoring:
 
-gradle
-Copy code
-implementation 'ai.djl:serving-api:0.15.0'
-implementation 'ai.djl.pytorch:pytorch-engine:0.15.0'
-implementation 'ai.djl.pytorch:pytorch-native-auto:1.9.0'
-Przygotuj model:
+5.1. Dodaj zależności dla Spring Boot Actuator.
+5.2. Skonfiguruj logowanie (np. Logback lub SLF4J).
+5.3. Monitoruj metryki i zdrowie aplikacji za pomocą Actuator.
+6. Testowanie:
 
-Umieść pobrane pliki modelu (pytorch_model.bin, config.json, pliki tokenizera itp.) w odpowiednim katalogu wewnątrz projektu, np. resources/models.
-Załaduj model w kodzie:
+6.1. Uruchom aplikację lokalnie.
+6.2. Użyj narzędzi, takich jak Postman, do testowania endpointu.
+7. Przygotowanie do Wdrożenia:
 
-Użyj DJL do załadowania modelu podczas startu aplikacji.
-Skonfiguruj tokenizację tekstu przy użyciu dostarczonych plików tokenizera.
-Stwórz endpoint API do podsumowywania tekstu:
+7.1. Utwórz Dockerfile, jeśli planujesz korzystać z Docker.
+7.2. Zbuduj obraz Docker.
+7.3. Publikuj obraz Docker na odpowiednim rejestrze (np. Docker Hub, AWS ECR).
+8. Wdrożenie Aplikacji:
 
-Utwórz kontroler Spring MVC z odpowiednim endpointem POST lub GET.
-Odbieraj tekst do podsumowania jako dane wejściowe.
-Przetwarzaj tekst za pomocą tokenizera i modelu.
-Zwróć podsumowanie jako odpowiedź.
-Skonfiguruj logowanie i monitoring:
+8.1. Wybierz odpowiednie środowisko produkcyjne.
+8.2. Skonfiguruj środowisko uwzględniając pamięć RAM, CPU, etc.
+8.3. Wdróż aplikację.
+9. Utrzymanie i Monitorowanie:
 
-Użyj Spring Boot Actuator dla podstawowych metryk i informacji o zdrowiu.
-Skonfiguruj logowanie, np. za pomocą Logback lub SLF4J.
-Przetestuj aplikację lokalnie:
-
-Uruchom aplikację i przetestuj endpoint za pomocą narzędzia, takiego jak Postman.
-Przygotuj aplikację do wdrożenia:
-
-Utwórz Dockerfile do konteneryzacji aplikacji, jeśli planujesz korzystać z Docker.
-Zbuduj i opublikuj obraz Docker, jeśli jest to konieczne.
-Wdróż aplikację:
-Możesz użyć tradycyjnych serwerów, takich jak Tomcat, lub użyć kontenerów z Docker.
-Skonfiguruj odpowiednie środowisko produkcyjne, uwzględniając zapotrzebowanie na pamięć RAM, CPU itp.
-Monitoruj i utrzymuj aplikację:
-Monitoruj metryki, logi i zdrowie 
+9.1. Monitoruj logi aplikacji.
+9.2. Odpowiadaj na potencjalne problemy lub błędy.
+9.3. Aktualizuj aplikację w miarę potrzeb.
